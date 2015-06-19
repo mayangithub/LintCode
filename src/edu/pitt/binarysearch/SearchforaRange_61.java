@@ -56,22 +56,8 @@ public class SearchforaRange_61 {
             }
         }
         
-        if (A.get(start) == target && A.get(end) == target) {
-            result.add(start);
-            result.add(end);
-            return result;
-        } else if (A.get(start) == target && A.get(end) != target) {
-            result.add(start);
-            result.add(start);
-            return result;
-        } else if (A.get(start) != target && A.get(end) == target) {
-            result.add(end);
-            result.add(end);
-            return result;
-        }
-        
-        result.add(-1);
-        result.add(-1);
+        result.add(findStart(A, target, start, end));
+        result.add(findEnd(A, target, start, end));
         return result;
         
     }
@@ -80,11 +66,7 @@ public class SearchforaRange_61 {
         while (start + 1 < end) {
             int mid = start + (end - start) / 2;
             if (A.get(mid) == target) {
-                if (A.get(mid - 1) == target) {
-                    end = mid;
-                } else {
-                    return mid;
-                }
+                end = mid;
             } else if (A.get(mid) > target) {
                 end = mid;
             } else if (A.get(mid) < target) {
@@ -104,11 +86,7 @@ public class SearchforaRange_61 {
         while (start + 1 < end) {
             int mid = start + (end - start) / 2;
             if (A.get(mid) == target) {
-                if (A.get(mid + 1) == target) {
-                    start = mid;
-                } else {
-                    return mid;
-                }
+                start = mid;
             } else if (A.get(mid) > target) {
                 end = mid;
             } else if (A.get(mid) < target) {

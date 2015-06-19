@@ -35,9 +35,6 @@ public class BinarySearch_14 {
         while (start + 1 < end) {
             int mid = start + (end - start) / 2;
             if (target == nums[mid]) {
-                if (nums[mid] != target) {
-                    return mid;
-                }
                 end = mid;
             } else if (target > nums[mid]) {
                 start = mid;
