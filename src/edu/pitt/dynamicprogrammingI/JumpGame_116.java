@@ -40,20 +40,11 @@ public class JumpGame_116 {
          truthtable[0] = true;
          
          for (int i = 1; i < n; i++) {
-             int j = i - 1;
-             while (j >= 0) {
-                 if (!truthtable[j]) {
-                     j--;
-                     continue;
-                 }
-                 if (j + A[j] >= i) {
+             for (int j = i - 1; j >= 0; j--) {
+                 if (truthtable[j] && j + A[j] >= i) {
                      truthtable[i] = true;
                      break;
                  }
-                 j--;
-             }
-             if (j == -1) {
-                 truthtable[i] = false;
              }
          }
          
