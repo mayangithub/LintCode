@@ -11,7 +11,9 @@ package edu.pitt.linkedlist;
  * Given 1->4->3->2->5->2->null and x = 3,
  * return 1->2->2->4->3->5->null.
  * @author yanma
- *
+ * @category Linked List
+ * @version 2015-07-06
+ * @class 6
  */
 public class PartitionList_96 {
 	
