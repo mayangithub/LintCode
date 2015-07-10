@@ -85,5 +85,59 @@ public class TopologicalSorting_127 {
         
         return result;
     }
+    
+    
+    /**
+     * DFS
+     * @param graph: A list of Directed graph node
+     * @return: Any topological order for the given graph.
+     */    
+    public ArrayList<DirectedGraphNode> topSort1(ArrayList<DirectedGraphNode> graph) {
+        // write your code here
+        // step 1: calculate all indegree for each node
+        // step 2: go through the graph list, once get the node which has indegree 0, call helper 
+        // step 3: add the node to result list, make it indegree be -1, 
+    	// step 4: loop through its neighbors, make them indegree minus 1, see neighbors which has indegree 0, call helper for it,
+        // step 5: go to step 3
+        
+        ArrayList<DirectedGraphNode> result = new ArrayList<DirectedGraphNode>();
+        if (graph == null || graph.size() == 0) {
+            return result;
+        }
+        
+        HashMap<DirectedGraphNode, Integer> map = new HashMap<DirectedGraphNode, Integer>();
+        // calculate indegree for each node
+        for (DirectedGraphNode fromNode: graph) {
+            if (!map.containsKey(fromNode)) {
+                map.put(fromNode, 0);
+            }
+            for (DirectedGraphNode toNode: fromNode.neighbors) {
+                if (!map.containsKey(toNode)) {
+                    map.put(toNode, 1);
+                } else {
+                    map.put(toNode, map.get(toNode) + 1);
+                }
+            }
+        }
+        
+        for (DirectedGraphNode node: graph) {
+            if (map.get(node) == 0) {
+                helper(graph, result, map, node);
+            }
+        }
+        
+        return result;
+    }
+    
+    public void helper(ArrayList<DirectedGraphNode> graph, ArrayList<DirectedGraphNode> result, HashMap<DirectedGraphNode, Integer> map, DirectedGraphNode node) {
+        result.add(node);
+        map.put(node, -1);
+        for (DirectedGraphNode neighbor: node.neighbors) {
+            map.put(neighbor, map.get(neighbor) - 1);
+            if (map.get(neighbor) == 0) {
+                helper(graph, result, map, neighbor);
+            }
+        }
+    }
 
 }
