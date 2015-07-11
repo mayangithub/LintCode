@@ -25,11 +25,53 @@ package edu.pitt.binarytree;
 public class LowestCommonAncestor_88 {
 	
 	/**
+	 * Faster solution
      * @param root: The root of the binary search tree.
      * @param A and B: two nodes in a Binary.
      * @return: Return the least common ancestor(LCA) of the two nodes.
      */
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode A, TreeNode B) {
+        // write your code here
+        if (root == null) {
+            return null;
+        } else if (root == A || root == B) {
+            return root;
+        }
+        
+        TreeNode aroot = null;
+        TreeNode broot = null;
+        
+        if (isInTree(root.left, A)) {
+            aroot = root.left;
+        } else if (isInTree(root.right, A)) {
+            aroot = root.right;
+        }
+        
+        if (isInTree(root.left, B)) {
+            broot = root.left;
+        } else if (isInTree(root.right, B)) {
+            broot = root.right;
+        }
+        
+        if (aroot == broot) {
+            return lowestCommonAncestor(aroot, A, B);
+        } else if (aroot != null && broot != null) {
+            return root;
+        } else if (aroot != null) {
+            return aroot;
+        } else if (broot != null) {
+            return broot;
+        }
+        
+        return null;
+    }
+	
+	/**
+     * @param root: The root of the binary search tree.
+     * @param A and B: two nodes in a Binary.
+     * @return: Return the least common ancestor(LCA) of the two nodes.
+     */
+    public TreeNode lowestCommonAncestor1(TreeNode root, TreeNode A, TreeNode B) {
         // write your code here
         if (root == null || A == null || B == null) {
             return null;
