@@ -29,7 +29,9 @@ import java.util.Set;
  * 	    All words have the same length.
  * 	    All words contain only lowercase alphabetic characters.
  * @author yanma
- *
+ * @category Graph and Search
+ * @version 2015-07-11
+ * @class 7
  */
 public class WordLadderII_121 {
 	
