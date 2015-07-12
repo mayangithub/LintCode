@@ -40,20 +40,19 @@ public class NQueens_33 {
      * @return: All distinct solutions
      * For example, A string '...Q' shows a queen on forth position
      */
-    ArrayList<ArrayList<String>> solveNQueens(int n) {
+	ArrayList<ArrayList<String>> solveNQueens(int n) {
         // write your code here
         ArrayList<ArrayList<String>> list = new ArrayList<ArrayList<String>>();
         if (n <= 0) {
             return list;
         }
-        ArrayList<ArrayList<Integer>> result = new ArrayList<ArrayList<Integer>>();
         
-        permutation(n, result, list, new ArrayList<Integer>());
+        permutation(n, list, new ArrayList<Integer>());
         
         return list;
     }
     
-    void permutation(int n, ArrayList<ArrayList<Integer>> result, ArrayList<ArrayList<String>> list, ArrayList<Integer> board) {
+    void permutation(int n, ArrayList<ArrayList<String>> list, ArrayList<Integer> board) {
         if (board.size() == n) {
             draw(n, board, list);
             return;
@@ -62,7 +61,7 @@ public class NQueens_33 {
         for (int i = 0; i < n; i++) {
             if (testBoard(board, i)) { 
                 board.add(i);
-                permutation(n, result, list, board);
+                permutation(n, list, board);
                 board.remove(board.size() - 1);
             }
         }
