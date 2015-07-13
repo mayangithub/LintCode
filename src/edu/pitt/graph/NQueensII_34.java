@@ -10,7 +10,9 @@ package edu.pitt.graph;
  * Example
  * For n=4, there are 2 distinct solutions.
  * @author yanma
- *
+ * @category Graph and Search
+ * @version 2015-07-13
+ * @class 7
  */
 public class NQueensII_34 {
 	
