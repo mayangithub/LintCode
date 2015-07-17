@@ -35,6 +35,7 @@ package edu.pitt.binarytree;
 public class RemoveNodeinBinarySearchTree_87 {
 	
 	/**
+	 * nine chapter method
      * @param root: The root of the binary search tree.
      * @param value: Remove the node with given value.
      * @return: The root of the binary search tree after removal.
@@ -42,10 +43,96 @@ public class RemoveNodeinBinarySearchTree_87 {
     public TreeNode removeNode(TreeNode root, int value) {
         // write your code here
         if (root == null) {
+            return null; 
+        }
+        
+        TreeNode dummy = new TreeNode(-1);
+        dummy.left = root;
+        TreeNode parent = dummy;
+        // find the node with value
+        parent = findNode(root, value, parent);
+        TreeNode node = root;
+        if (parent.left != null && parent.left.val == value) {
+            node = parent.left;
+        } else if (parent.right != null && parent.right.val == value) {
+            node = parent.right;
+        } else {
+            return dummy.left;
+        }
+        
+        // find the node to replace with
+        // remove leaf node
+        if (node.left == null && node.right == null) {
+            if (parent.left == node) {
+                parent.left = null;
+            } else if (parent.right == node) {
+                parent.right = null;
+            }
+            return dummy.left;
+        }
+        
+        if (node.right == null) {
+            if (node == parent.left) {
+                parent.left = node.left;
+            } else {
+                parent.right = node.left;
+            }
+        } else {
+            TreeNode temp = node.right;
+            TreeNode father = node;
+            
+            while (temp.left != null) {
+                father = temp;
+                temp = temp.left;
+            }
+            
+            if (temp == father.left) {
+                father.left = temp.right;
+            } else {
+                father.right = temp.right;
+            }
+            
+            if (node == parent.left) {
+                parent.left = temp;
+            } else {
+                parent.right = temp;
+            }
+            
+            temp.left = node.left;
+            temp.right = node.right;
+        }
+        
+        return dummy.left;
+    }
+    
+    public TreeNode findNode(TreeNode node, int value, TreeNode parent) {
+        if (node == null) {
+            return parent;
+        }
+        if (value == node.val) {
+            return parent;
+        }else if (value < node.val) {
+            return findNode(node.left, value, node);
+        } else {
+            return findNode(node.right, value, node);
+        }
+    }
+    
+	
+	
+	/**
+	 * my method
+     * @param root: The root of the binary search tree.
+     * @param value: Remove the node with given value.
+     * @return: The root of the binary search tree after removal.
+     */
+    public TreeNode removeNode1(TreeNode root, int value) {
+        // write your code here
+        if (root == null) {
             return null;
         }
         
-        TreeNode node = findNode(root, value);
+        TreeNode node = findNode1(root, value);
         if (node == null) {
             return root; // do nothing
         } 
@@ -76,7 +163,7 @@ public class RemoveNodeinBinarySearchTree_87 {
         return (pre == null) ? null : root;
     }
     
-    public TreeNode findNode(TreeNode root, int value) {
+    public TreeNode findNode1(TreeNode root, int value) {
         if (root == null) {
             return null;
         }
@@ -85,9 +172,9 @@ public class RemoveNodeinBinarySearchTree_87 {
         }
         
         if (value < root.val) { // find in left subtree
-            return findNode(root.left, value);
+            return findNode1(root.left, value);
         } else {
-            return findNode(root.right, value);
+            return findNode1(root.right, value);
         }
     }
     
