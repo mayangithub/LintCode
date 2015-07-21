@@ -18,11 +18,28 @@ package edu.pitt.highfrequency;
  */
 public class O1CheckPowerof2_142 {
 	
-	 /*
+	/*
+	 * delete the first '1'
+	 * https://en.wikipedia.org/wiki/Power_of_two
      * @param n: An integer
      * @return: True or false
      */
     public boolean checkPowerOf2(int n) {
+        // write your code here
+        if (n <= 0) {
+            return false;
+        }
+        
+        int result = (n - 1) & n;
+        return result == 0;
+    }
+	
+	
+	 /*
+     * @param n: An integer
+     * @return: True or false
+     */
+    public boolean checkPowerOf22(int n) {
         // write your code here
         if (n <= 0) {
             return false;
@@ -50,5 +67,7 @@ public class O1CheckPowerof2_142 {
         
         return n == 1 || (n % 2 == 0 && checkPowerOf21(n/2));
     }
+    
+    
 
 }
