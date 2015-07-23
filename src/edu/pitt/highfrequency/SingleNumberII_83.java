@@ -49,5 +49,9 @@ public class SingleNumberII_83 {
         
         return result;
     }
+    
+    public void main(String[] args) {
+    	System.out.println(Math.pow(3, 20));
+    }
 
 }
