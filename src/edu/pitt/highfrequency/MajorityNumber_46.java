@@ -6,7 +6,7 @@ package edu.pitt.highfrequency;
 import java.util.ArrayList;
 
 /**
- * Majority Number #46 --- Accepteddd
+ * Majority Number #46 --- Accepted
  * Given an array of integers, the majority number is the number 
  * that occurs more than half of the size of the array. Find it.
  * Example
