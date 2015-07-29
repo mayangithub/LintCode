@@ -47,6 +47,28 @@ public class MaximumSubarray_41 {
         return max;
         
     }
+    
+    /**
+     * O(n) time and O(1) space
+     * using local and global
+     * @param nums: A list of integers
+     * @return: A integer indicate the sum of max subarray
+     */
+    public int maxSubArray3(ArrayList<Integer> nums) {
+        // write your code
+        if (nums == null || nums.size() == 0) {
+            return 0;
+        }
+        
+        int global = Integer.MIN_VALUE;
+        int local = 0;
+        for (int i = 0; i < nums.size(); i++) {
+            local = Math.max(nums.get(i),local + nums.get(i));
+            global = Math.max(global, local);
+        }
+        
+        return global;
+    }
 	
 	
 	
