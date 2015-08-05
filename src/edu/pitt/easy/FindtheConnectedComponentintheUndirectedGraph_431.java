@@ -4,6 +4,7 @@
 package edu.pitt.easy;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -12,7 +13,7 @@ import java.util.Queue;
 import edu.pitt.graph.UndirectedGraphNode;
 
 /**
- * Find the Connected Component in the Undirected Graph #431
+ * Find the Connected Component in the Undirected Graph #431 --- Accepted
  * Find the number connected component in the undirected graph. 
  * Each node in the graph contains a label and a list of its neighbors. 
  * (a connected component (or just component) of an undirected graph 
@@ -71,6 +72,7 @@ public class FindtheConnectedComponentintheUndirectedGraph_431 {
                         }
                     }
                 }
+                Collections.sort(inner);
                 result.add(inner);
             }
         }
