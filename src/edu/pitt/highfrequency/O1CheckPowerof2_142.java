@@ -19,7 +19,7 @@ package edu.pitt.highfrequency;
 public class O1CheckPowerof2_142 {
 	
 	/*
-	 * delete the first '1'
+	 * delete the last '1'
 	 * https://en.wikipedia.org/wiki/Power_of_two
      * @param n: An integer
      * @return: True or false
