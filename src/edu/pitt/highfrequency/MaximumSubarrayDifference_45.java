@@ -61,5 +61,72 @@ public class MaximumSubarrayDifference_45 {
         
         return maxgap;
     }
+    
+    /**
+     * @param nums: A list of integers
+     * @return: An integer indicate the value of maximum difference between two
+     *          Subarrays
+     */
+    public int maxDiffSubArrays1(ArrayList<Integer> nums) {
+        // write your code
+        if (nums == null || nums.size() == 0) {
+            return 0;
+        }
+        int size = nums.size();
+        int[] leftmax = new int[size];
+        int[] leftmin = new int[size];
+        int[] rightmin = new int[size];
+        int[] rightmax = new int[size];
+    
+        int sum = 0;
+        int minSum = 0;
+        int max = Integer.MIN_VALUE;
+        for (int i = 0; i < size; i++) {
+            sum += nums.get(i);
+            max = Math.max(max, sum - minSum);
+            leftmax[i] = max;
+            minSum = Math.min(minSum, sum);
+        }
+        
+        sum = 0;
+        int maxSum = 0;
+        int min = Integer.MAX_VALUE;
+        for (int i = 0; i < size; i++) {
+            sum += nums.get(i);
+            min = Math.min(min, sum - maxSum);
+            leftmin[i] = min;
+            maxSum = Math.max(maxSum, sum);
+        }
+        
+        
+        sum = 0;
+        minSum = 0;
+        max = Integer.MIN_VALUE;
+        for (int i = size - 1; i >= 0; i--) {
+            sum += nums.get(i);
+            max = Math.max(max, sum - minSum);
+            rightmax[i] = max;
+            minSum = Math.min(minSum, sum);
+        }
+        
+        sum = 0;
+        maxSum = 0;
+        min = Integer.MAX_VALUE;
+        for (int i = size - 1; i >= 0; i--) {
+            sum += nums.get(i);
+            min = Math.min(min, sum - maxSum);
+            rightmin[i] = min;
+            maxSum = Math.max(maxSum, sum);
+        }
+        
+        int maxgap = 0;
+        
+        for (int i = 0; i < size - 1; i++) {
+            maxgap = Math.max(maxgap, Math.abs(leftmax[i] - rightmin[i + 1]));
+            maxgap = Math.max(maxgap, Math.abs(rightmax[i + 1] - leftmin[i]));
+        }
+        
+        return maxgap;
+    }
 
 }
