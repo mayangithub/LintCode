@@ -41,5 +41,35 @@ public class ProductofArrayExcludeItself_50 {
         
         return result;
     }
+    
+    /**
+     * @param A: Given an integers array A
+     * @return: A Long array B and B[i]= A[0] * ... * A[i-1] * A[i+1] * ... * A[n-1]
+     */
+    public ArrayList<Long> productExcludeItself1(ArrayList<Integer> A) {
+        // write your code
+        ArrayList<Long> result = new ArrayList<Long>();
+        if (A == null || A.size() == 0) {
+            return result;
+        }
+        
+        ArrayList<Long> left = new ArrayList<Long>();
+        ArrayList<Long> right = new ArrayList<Long>();
+        left.add((long)1);
+        for (int i = 0; i < A.size() - 1; i++) {
+            left.add(left.get(i) * A.get(i));
+        }
+        
+        right.add((long)1);
+        for (int i = A.size() - 1; i > 0; i--) {
+            right.add(0, right.get(0) * A.get(i));
+        }
+        
+        for (int i = 0; i < A.size(); i++) {
+            result.add(left.get(i) * right.get(i));
+        }
+        
+        return result;
+    }
 
 }
