@@ -9,7 +9,7 @@ package edu.pitt.segmenttree;
  *
  */
 public class SegmentTreeNode {
-	public int start, end, max;
+	public int start, end, max, count;
 	public SegmentTreeNode left, right;
 	public SegmentTreeNode(int start, int end, int max) {
 		this.start = start;
