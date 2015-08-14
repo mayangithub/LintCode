@@ -55,22 +55,59 @@ public class SegmentTreeQuery_202 {
         // if [start, end] intersect/ contained by left range
         if (start <= mid) {
             if (end > mid) {
-                maxleft = query(root.left, start, mid);
+                maxleft = query(root.left, start, mid); // give to maxleft value, not return
             } else {
                 maxleft = query(root.left, start, end);
             }
         }
         
         // if [start, end] intersect/ contained by right range
-        if (end > mid) {
-            if (start <= mid) {
-                maxright = query(root.right, mid + 1, end);
+        if (end > mid) { // end >= mid + 1
+            if (start <= mid) { // start <= mid + 1
+                maxright = query(root.right, mid + 1, end); // caution: mid + 1 as start
             } else {
-                maxright = query(root.right, start, end);
+                maxright = query(root.right, start, end);// give to maxright value, not return
             }
         }
         
         return Math.max(maxleft, maxright);
     }
+    
+    
+    /**
+     * according to 4 conditions and each operations
+     *@param root, start, end: The root of segment tree and 
+     *                         an segment / interval
+     *@return: The maximum number in the interval [start, end]
+     */
+    public int query1(SegmentTreeNode root, int start, int end) {
+        // write your code here
+        if (start > end) {
+            return Integer.MIN_VALUE;
+        }
+        
+        if (start == root.start && end == root.end) { //相等
+            return root.max;
+        } 
+        
+        if (start >= root.start && end <= root.end) { //包含
+            int max1 = query1(root.left, start, end);
+            int max2 = query1(root.right, start, end);
+            return Math.max(max1, max2);
+        }
+        
+        if (start > root.end || end < root.start) { //不相交
+            return Integer.MIN_VALUE;
+        }
+        
+        if (end > root.end) {//向右相交不相等
+            return query1(root, start, root.end);
+        } else if (start < root.start) {//向左相交不相等
+            return query1(root, root.start, end);
+        }
+        
+        return Integer.MIN_VALUE;
+    }
+    
 
 }
