@@ -84,7 +84,9 @@ public class NumberofIslands_433 {
         int rows = grid.length;
         int cols = grid[0].length;
         UnionFind uf = new UnionFind(nodes);
+        int count = nodes.size();
         for (Integer node: nodes) {
+            boolean connected = false;
             int r = node / cols;
             int c = node % cols;
             int up = r - 1;
@@ -92,28 +94,40 @@ public class NumberofIslands_433 {
             int left = c - 1;
             int right = c + 1;
             if (up >= 0 && nodes.contains(up * cols + c)) {
-                uf.union(node, up * cols + c);
+                int f1 = uf.find(node);
+                int f2 = uf.find(up * cols + c);
+                if (f1 != f2) {
+                    count--;
+                    uf.union(f1, f2);
+                }
             }
             if (down < rows && nodes.contains(down * cols + c)) {
-                uf.union(node, down * cols + c);
+                int f1 = uf.find(node);
+                int f2 = uf.find(down * cols + c);
+                if (f1 != f2) {
+                    count--;
+                    uf.union(f1, f2);
+                }
             }
             if (left >= 0 && nodes.contains(r * cols + left)) {
-                uf.union(node, r * cols + left);
+                int f1 = uf.find(node);
+                int f2 = uf.find(r * cols + left);
+                if (f1 != f2) {
+                    count--;
+                    uf.union(f1, f2);
+                }
             }
             if (right < cols && nodes.contains(r * cols + right)) {
-                uf.union(node, r * cols + right);
+                int f1 = uf.find(node);
+                int f2 = uf.find(r * cols + right);
+                if (f1 != f2) {
+                    count--;
+                    uf.union(f1, f2);
+                }
             }
         }
         
-        HashSet<Integer> father = new HashSet<Integer>();
-        for (Integer node: nodes) {
-            int fa = uf.find(node);
-            if (!father.contains(fa)) {
-                father.add(fa);
-            }
-        }
-        
-        return father.size();
+        return count;
     }
     
     public HashSet<Integer> transform(boolean[][] grid) {
