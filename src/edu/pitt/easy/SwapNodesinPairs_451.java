@@ -40,7 +40,7 @@ public class SwapNodesinPairs_451 {
             first.next = next;
             front = first;
             first = next;
-            second = (first == null)? null: first.next;
+            second = (first == null)? null: first.next; //trick
         }
         
         return dummy.next;
