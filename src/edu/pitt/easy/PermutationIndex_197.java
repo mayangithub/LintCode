@@ -24,6 +24,54 @@ public class PermutationIndex_197 {
      */
     public long permutationIndex(int[] A) {
         // Write your code here
+        if (A == null || A.length == 0) {
+            return 0;
+        }
+        
+        HashMap<Integer, Integer> map = new HashMap<Integer, Integer>();
+        for (int i = 0; i < A.length; i++) {
+            if (!map.containsKey(A[i])) {
+                map.put(A[i], 1);
+            } else {
+                map.put(A[i], map.get(A[i]) + 1);
+            }
+        }
+        
+        long ans = 0;
+        for (int i = 0; i < A.length; i++) {
+            int sum = 0;
+            for (int j = i + 1; j < A.length; j++) {
+                if (A[j] < A[i]) {
+                   sum++; 
+                }
+            }
+            if (sum > 0) {
+                ans += sum * factorial(A.length - i - 1);
+            }
+            
+            map.put(A[i], map.get(A[i]) - 1);
+        }
+        
+        return ans + 1;
+    }
+    
+    
+    
+    public long factorial(int num) {
+        long fac = 1;
+        for (int i = 1; i <= num; i++) {
+            fac *= (long) i;
+        }
+        return fac;
+    }
+	
+	
+	/**
+     * @param A an integer array
+     * @return a long integer
+     */
+    public long permutationIndex1(int[] A) {
+        // Write your code here
         
         if (A == null || A.length <= 1) {
             return 0;
